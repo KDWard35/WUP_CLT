@@ -160,6 +160,26 @@ print(paste('mean = ', mean(my1000$k25),' sd = ',sd(my1000$k25)))
 According to CLT, my standard deviation should be decreasing and be around 8.33300476469. My answer is close to that.
 According to CLT, my mean should be 50.042. My mean is around the same. 
 
+```{r}
+numb = 36
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k36 = x.avg
 
 
+p <- ggplot(my1000, aes(x=k36),col=sex) + 
+  geom_density() +
 
+# Add mean line
+ geom_vline(aes(xintercept=mean(k36)),
+            color="blue", linetype="dashed", size=1)
+p + ggtitle("n = 36") +
+  xlab("temperature") + ylab(" density")
+
+print(paste('mean = ', mean(my1000$k36),' sd = ',sd(my1000$k36)))
+
+```
+
+According to CLT, my standard deviation should be decreasing and be around 6.94417063724. My answer is close to that.
+According to CLT, my mean should be 50.042. My mean is around the same. 
